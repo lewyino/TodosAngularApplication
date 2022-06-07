@@ -1,0 +1,1 @@
+export type taskType = 'todo' | 'in_progress' | 'done';

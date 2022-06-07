@@ -1,0 +1,7 @@
+<div class="row">
+    <app-task-list
+        *ngFor="let item of todos"
+        [taskList]="item"
+        class="col p-1 mx-2 border"
+    ></app-task-list>
+</div>
