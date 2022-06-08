@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'todos', component: TodosComponent },
   { path: 'hello', component: HelloComponent },
   { path: 'form', component: TaskFormComponent },
+  { path: 'form/:id', component: TaskFormComponent },
   { path: '', redirectTo: 'todos', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];

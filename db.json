@@ -11,23 +11,23 @@
       "type": "todo"
     },
     {
-      "id": 3,
-      "title": "in progress 1",
-      "type": "in_progress"
-    },
-    {
       "id": 4,
       "title": "done 1",
       "type": "done"
     },
     {
-      "title": "test 1",
+      "title": "test",
       "id": 5,
       "type": "todo"
     },
     {
-      "title": "test 2",
+      "title": "in progress 2",
       "id": 6,
+      "type": "done"
+    },
+    {
+      "title": "in progress 1",
+      "id": 7,
       "type": "in_progress"
     }
   ]

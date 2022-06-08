@@ -56,9 +56,45 @@ export class DataService {
       });
   }
 
+  getTask(taskId: string): Observable<Task | null> {
+    return this.httpClient
+      .get(this.URL + '/' + taskId)
+      .pipe(
+        map((task) => new Task(task)),
+        catchError((err) => {
+          console.error(err);
+          return of(null);
+        })
+      )
+  }
+
   addTask(task: Task): Observable<boolean> {
     return this.httpClient
       .post(this.URL, task)
+      .pipe(
+        map(() => true),
+        catchError((err) => {
+          console.error(err);
+          return of(false);
+        })
+      )
+  }
+
+  editTask(task: Task): Observable<boolean> {
+    return this.httpClient
+      .put(this.URL + '/' + task.id, task)
+      .pipe(
+        map(() => true),
+        catchError((err) => {
+          console.error(err);
+          return of(false);
+        })
+      )
+  }
+
+  deleteTask(taskId: string): Observable<boolean> {
+    return this.httpClient
+      .delete(this.URL + '/' + taskId)
       .pipe(
         map(() => true),
         catchError((err) => {
