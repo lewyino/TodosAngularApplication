@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of, Subject } from 'rxjs';
+import { catchError, map, Observable, of, Subject } from 'rxjs';
 import { Task } from '../models/task';
 import { TaskList } from '../models/task-list';
 
@@ -54,5 +54,17 @@ export class DataService {
         });
         this.data$.next([todoList, inProgressList, doneList]);
       });
+  }
+
+  addTask(task: Task): Observable<boolean> {
+    return this.httpClient
+      .post(this.URL, task)
+      .pipe(
+        map(() => true),
+        catchError((err) => {
+          console.error(err);
+          return of(false);
+        })
+      )
   }
 }

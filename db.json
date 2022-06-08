@@ -19,6 +19,16 @@
       "id": 4,
       "title": "done 1",
       "type": "done"
+    },
+    {
+      "title": "test 1",
+      "id": 5,
+      "type": "todo"
+    },
+    {
+      "title": "test 2",
+      "id": 6,
+      "type": "in_progress"
     }
   ]
 }

@@ -9,10 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HelloComponent } from './components/hello/hello.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { TaskFormComponent } from './components/task-form/task-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: 'todos', component: TodosComponent },
   { path: 'hello', component: HelloComponent },
+  { path: 'form', component: TaskFormComponent },
   { path: '', redirectTo: 'todos', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];
@@ -24,12 +27,14 @@ const routes: Routes = [
     TaskListComponent,
     TodosComponent,
     HelloComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    TaskFormComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

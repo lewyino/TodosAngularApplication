@@ -1,0 +1,16 @@
+<p>Task Form</p>
+<div *ngIf="form">
+    <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+        title: <input type="text" formControlName="title"><br>
+        type: <select formControlName="type">
+            <option value="todo">TODO</option>
+            <option value="in_progress">IN PROGRESS</option>
+            <option value="done">DONE</option>
+        </select><br>
+        <button type="submit">Submit!</button>
+    </form>
+    <div>
+        form valid: {{ form.valid }}<br>
+        form value: {{ form.value | json }}
+    </div>
+</div>
