@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError, Observable, of, Subject } from 'rxjs';
 import { Task } from '../models/task';
 import { TaskList } from '../models/task-list';
 
@@ -7,35 +9,50 @@ import { TaskList } from '../models/task-list';
 })
 export class DataService {
 
-  private todos: TaskList[] = [
-    new TaskList({
-      title: 'TODO',
-      type: 'todo',
-      tasks: [
-        new Task({title: 'todo1', type: 'todo'}),
-        new Task({title: 'todo2', type: 'todo'}),
-        new Task({title: 'todo3', type: 'todo'}),
-      ],
-    }),
-    new TaskList({
-      title: 'IN PROGRESS',
-      type: 'in_progress',
-      tasks: [
-        new Task({title: 'in progress 1', type: 'in_progress'}),
-      ],
-    }),
-    new TaskList({
-      title: 'DONE',
-      type: 'done',
-      tasks: [
-        new Task({title: 'done 1', type: 'done'}),
-      ],
-    })
-  ]
+  private readonly URL = 'http://localhost:3000/tasks';
 
-  constructor() { }
+  private data$: Subject<TaskList[]> = new Subject();
 
-  getData() {
-    return this.todos;
+  constructor(private httpClient: HttpClient) { }
+
+  getData(): Observable<TaskList[]> {
+    return this.data$;
+  }
+
+  loadData() {
+    this.httpClient
+      .get<Task[]>(this.URL)
+      .pipe(
+        catchError((err) => {
+          console.error(err);
+          return of([]);
+        })
+      )
+      .subscribe((data: Task[]) => {
+        console.log(data);
+        const todoList = new TaskList({
+          title: 'TODO',
+          type: 'todo',
+          tasks: [],
+        });
+        const inProgressList = new TaskList({
+          title: 'IN PROGRESS',
+          type: 'in_progress',
+          tasks: [],
+        });
+        const doneList = new TaskList({
+          title: 'DONE',
+          type: 'done',
+          tasks: [],
+        });
+        data.forEach((task: Task) => {
+          switch (task.type) {
+            case 'todo': todoList.tasks.push(task); break;
+            case 'in_progress': inProgressList.tasks.push(task); break;
+            case 'done': doneList.tasks.push(task); break;
+          }
+        });
+        this.data$.next([todoList, inProgressList, doneList]);
+      });
   }
 }
