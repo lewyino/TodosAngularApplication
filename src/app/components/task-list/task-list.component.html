@@ -2,6 +2,7 @@
 <div 
     *ngFor="let item of taskList?.tasks"
     class="border p-2 my-1"
+    appHighlight="lightgreen"
 >
     <app-task [task]="item"></app-task>
 </div>

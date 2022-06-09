@@ -11,6 +11,9 @@ import { HelloComponent } from './components/hello/hello.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DefaultValuePipe } from './pipes/default-value.pipe';
+import { HighlightDirective } from './directives/highlight.directive';
+import { StatsModule } from './modules/stats/stats.module';
 
 const routes: Routes = [
   { path: 'todos', component: TodosComponent },
@@ -29,11 +32,14 @@ const routes: Routes = [
     TodosComponent,
     HelloComponent,
     NotFoundComponent,
-    TaskFormComponent
+    TaskFormComponent,
+    DefaultValuePipe,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    StatsModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
   ],

@@ -1,4 +1,5 @@
 <h2>{{ task?.title }}</h2>
+<div>{{ task?.id | defaultValue:'[no id]' }}</div>
 <button 
     type="button" 
     (click)="onDeleteButton()"
